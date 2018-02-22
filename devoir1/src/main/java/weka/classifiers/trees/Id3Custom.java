@@ -30,6 +30,7 @@ import weka.core.Capabilities;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.NoSupportForMissingValuesException;
+import weka.core.Option;
 import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformationHandler;
@@ -37,8 +38,11 @@ import weka.core.Utils;
 import weka.core.Capabilities.Capability;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
+import weka.core.OptionHandler;
 
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Vector;
 
 /**
  <!-- globalinfo-start -->
@@ -70,7 +74,7 @@ import java.util.Enumeration;
  * <pre> -D
  *  If set, classifier is run in debug mode and
  *  may output additional info to the console</pre>
- * 
+ *
  <!-- options-end -->
  *
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
@@ -99,7 +103,78 @@ public class Id3Custom
   private Attribute m_ClassAttribute;
   
   /** Alpha parameter for Havrda & Charvat entropy */
-  private float alpha = 0.5f;
+  private float m_alpha = 0.2f;
+  
+  /**
+   * Set alpha value for entropy.
+   */
+  public void setAlpha(float alpha) {
+  	if (alpha > 0 && alpha != 1) m_alpha = alpha;
+  }
+  
+  /**
+   * Get alpha value for entropy.
+   */
+  public float getAlpha() {
+  	return m_alpha;
+  }
+
+  /**
+   * Returns an enumeration describing the available options.
+   *
+   * @return an enumeration of all the available options.
+   */
+  @Override
+  public Enumeration<Option> listOptions() {
+    Vector<Option> newVector = new Vector<Option>(9);
+
+    newVector.addElement(new Option(
+                    "\tSet Alpha default 0.5",
+                    "A", 1, "-A <Alpha>"));
+
+    newVector.addAll(Collections.list(super.listOptions()));
+
+    return newVector.elements();
+  }
+  /**
+   * <pre>
+   *  -A
+   *    Set Alpha for Gain Function
+   * </pre>
+   */
+  @Override
+  public void setOptions(String[] options) throws Exception {
+    // TODO Auto-generated method stub
+    super.setOptions(options);
+    String optionString = Utils.getOption("-A", options);
+    setAlpha(Float.parseFloat(optionString));
+  }
+
+
+  @Override
+  public String[] getOptions() {
+    Vector<String> options = new Vector<String>();
+    options.add("-A");
+    options.add("" + getAlpha());
+
+    Collections.addAll(options, super.getOptions());
+
+    return options.toArray(new String[0]);
+  }
+
+
+
+  @Override
+  public boolean getDebug() {
+    // TODO Auto-generated method stub
+    return super.getDebug();
+  }
+
+  @Override
+  protected Object clone() throws CloneNotSupportedException {
+    // TODO Auto-generated method stub
+    return super.clone();
+  }
 
   /**
    * Returns a string describing the classifier.
@@ -113,6 +188,7 @@ public class Id3Custom
       + "information see: \n\n"
       + getTechnicalInformation().toString();
   }
+
 
   /**
    * Returns an instance of a TechnicalInformation object, containing 
@@ -325,14 +401,14 @@ public class Id3Custom
         //entropy -= classCounts[j] * Utils.log2(classCounts[j]);
         
         //Havrda & Charvat entropy 
-        entropy += (Math.pow(classCounts[j]/(double)data.numInstances(), alpha)-1.);
+        entropy += (Math.pow(classCounts[j]/(double)data.numInstances(), m_alpha)-1.);
       }
     }
     //entropy /= (double) data.numInstances();
     //return entropy + Utils.log2(data.numInstances());
     
     //Havrda & Charvat entropy 
-    return entropy * Math.pow(Math.pow(2., 1.-alpha)-1., -1.);
+    return entropy * Math.pow(Math.pow(2., 1.-m_alpha)-1., -1.);
   }
 
   /**
@@ -510,6 +586,6 @@ public class Id3Custom
    * @param args the options for the classifier
    */
   public static void main(String[] args) {
-    runClassifier(new Id3(), args);
+    runClassifier(new Id3Custom(), args);
   }
 }
