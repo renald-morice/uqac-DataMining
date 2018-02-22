@@ -18,4 +18,6 @@ ant exejar
 java -Xmx8g -jar .\dist\weka.jar
 ```
 
+Données kddcup récupéreées depuis http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html
+
 
