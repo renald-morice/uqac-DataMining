@@ -1,7 +1,7 @@
 === Run information ===
 
 Scheme:       weka.classifiers.trees.Id3Custom -A 0.8
-Relation:     kddcup.data_10_percent-weka.filters.unsupervised.attribute.RenameNominalValues-Rlabel-Nftp_write.:R2L., guess_passwd.:R2L., imap.:R2L., multihop.:R2L., phf.:R2L., spy.:R2L., warezclient.:R2L., warezmaster.:R2L.-weka.filters.unsupervised.attribute.RenameNominalValues-Rlabel-Nback.:DoS., land.:DoS., neptune.:DoS., pod.:DoS., smurf.:DoS., teardrop.:DoS.-weka.filters.unsupervised.attribute.RenameNominalValues-Rlabel-Nbuffer_overflow.:U2R., perl.:U2R., loadmodule.:U2R., rootkit.:U2R.-weka.filters.unsupervised.attribute.RenameNominalValues-Rlabel-Nipsweep.:Probing., nmap.:Probing., portsweep.:Probing., satan.:Probing.-weka.filters.unsupervised.attribute.Remove-R15-41-weka.filters.unsupervised.attribute.NumericToNominal-Rfirst-last-weka.filters.unsupervised.instance.Resample-S1-Z100.0-weka.filters.unsupervised.instance.Resample-S1-Z10.0
+Relation:     kddcup.data_10_percent-weka.filters.unsupervised.attribute.RenameNominalValues-Rlabel-Nftp_write.:R2L., guess_passwd.:R2L., imap.:R2L., multihop.:R2L., phf.:R2L., spy.:R2L., warezclient.:R2L., warezmaster.:R2L.-weka.filters.unsupervised.attribute.RenameNominalValues-Rlabel-Nback.:DoS., land.:DoS., neptune.:DoS., pod.:DoS., smurf.:DoS., teardrop.:DoS.-weka.filters.unsupervised.attribute.RenameNominalValues-Rlabel-Nbuffer_overflow.:U2R., perl.:U2R., loadmodule.:U2R., rootkit.:U2R.-weka.filters.unsupervised.attribute.RenameNominalValues-Rlabel-Nipsweep.:Probing., nmap.:Probing., portsweep.:Probing., satan.:Probing.-weka.filters.unsupervised.attribute.Remove-R15-41-weka.filters.unsupervised.attribute.NumericToNominal-Rfirst-last-weka.filters.unsupervised.instance.Resample-S2-Z10.0
 Instances:    49402
 Attributes:   15
               duration
@@ -25,9 +25,35 @@ Test mode:    split 66.0% train, remainder test
 
 Id3
 
-: DoS.
 
-Time taken to build model: 0.66 seconds
+root_shell = 0
+|  logged_in = 0
+|  |  hot = 0: DoS.
+|  |  hot = 1: R2L.
+|  |  hot = 2: null
+|  |  hot = 3: null
+|  |  hot = 4: null
+|  |  hot = 5: null
+|  |  hot = 6: null
+|  |  hot = 7: null
+|  |  hot = 9: null
+|  |  hot = 10: null
+|  |  hot = 12: null
+|  |  hot = 14: null
+|  |  hot = 15: null
+|  |  hot = 16: null
+|  |  hot = 17: null
+|  |  hot = 18: null
+|  |  hot = 19: null
+|  |  hot = 20: null
+|  |  hot = 22: null
+|  |  hot = 24: null
+|  |  hot = 28: null
+|  |  hot = 30: null
+|  logged_in = 1: normal.
+root_shell = 1: U2R.
+
+Time taken to build model: 3.32 seconds
 
 === Evaluation on test split ===
 
@@ -35,28 +61,29 @@ Time taken to test model on test split: 0.03 seconds
 
 === Summary ===
 
-Correctly Classified Instances       13287               79.1034 %
-Incorrectly Classified Instances      3510               20.8966 %
-Kappa statistic                          0
+Correctly Classified Instances       13226               78.7403 %
+Incorrectly Classified Instances      3570               21.2538 %
+Kappa statistic                          0.0101
 Mean absolute error                      0.029
-Root mean squared error                  0.1207
-Relative absolute error                 99.8687 %
-Root relative squared error            100.0003 %
+Root mean squared error                  0.1213
+Relative absolute error                 99.1762 %
+Root relative squared error             99.7164 %
+UnClassified Instances                   1                0.006  %
 Total Number of Instances            16797
 
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
-                 0.000    0.000    ?          0.000    ?          ?        0.500     0.197     normal.
-                 0.000    0.000    ?          0.000    ?          ?        0.500     0.000     U2R.
+                 0.005    0.000    0.941      0.005    0.009      0.058    0.505     0.209     normal.
+                 0.500    0.000    1.000      0.500    0.667      0.707    0.751     0.500     U2R.
                  ?        0.000    ?          ?        ?          ?        ?         ?         loadmodule.
                  ?        0.000    ?          ?        ?          ?        ?         ?         perl.
-                 1.000    1.000    0.791      1.000    0.883      ?        0.500     0.791     DoS.
+                 1.000    0.994    0.787      1.000    0.881      0.071    0.506     0.788     DoS.
                  ?        0.000    ?          ?        ?          ?        ?         ?         smurf.
-                 0.000    0.000    ?          0.000    ?          ?        0.500     0.003     R2L.
+                 0.217    0.000    1.000      0.217    0.357      0.466    0.585     0.241     R2L.
                  ?        0.000    ?          ?        ?          ?        ?         ?         pod.
                  ?        0.000    ?          ?        ?          ?        ?         ?         teardrop.
-                 0.000    0.000    ?          0.000    ?          ?        0.500     0.009     Probing.
+                 0.000    0.000    ?          0.000    ?          ?        0.503     0.008     Probing.
                  ?        0.000    ?          ?        ?          ?        ?         ?         ipsweep.
                  ?        0.000    ?          ?        ?          ?        ?         ?         land.
                  ?        0.000    ?          ?        ?          ?        ?         ?         ftp_write.
@@ -70,21 +97,21 @@ Total Number of Instances            16797
                  ?        0.000    ?          ?        ?          ?        ?         ?         warezclient.
                  ?        0.000    ?          ?        ?          ?        ?         ?         spy.
                  ?        0.000    ?          ?        ?          ?        ?         ?         rootkit.
-Weighted Avg.    0.791    0.791    ?          0.791    ?          ?        0.500     0.665
+Weighted Avg.    0.787    0.781    ?          0.787    ?          ?        0.506     0.663
 
 === Confusion Matrix ===
 
      a     b     c     d     e     f     g     h     i     j     k     l     m     n     o     p     q     r     s     t     u     v     w   <-- classified as
-     0     0     0     0  3310     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     a = normal.
-     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     b = U2R.
+    16     0     0     0  3412     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     a = normal.
+     0     1     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     b = U2R.
      0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     c = loadmodule.
      0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     d = perl.
-     0     0     0     0 13287     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     e = DoS.
+     0     0     0     0 13204     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     e = DoS.
      0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     f = smurf.
-     0     0     0     0    49     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     g = R2L.
+     1     0     0     0    17     0     5     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     g = R2L.
      0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     h = pod.
      0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     i = teardrop.
-     0     0     0     0   150     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     j = Probing.
+     0     0     0     0   139     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     j = Probing.
      0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     k = ipsweep.
      0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     l = land.
      0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0 |     m = ftp_write.
